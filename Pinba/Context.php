@@ -19,14 +19,29 @@ class Context
 
     /**
     * Change the pinba_script_name_set
-    * @param string $script_name the new script name
+    * @param string $scriptName the new script name
     *
     * @return Context the current context
     */
-    public function setScriptName($script_name)
+    public function setScriptName($scriptName)
     {
         if ($this->isEnabled()) {
-            pinba_script_name_set($script_name);
+            pinba_script_name_set($scriptName);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Change the pinba_server_name_set
+     * @param string $serverName
+     *
+     * @return Context the current context
+     */
+    public function setServerName($serverName)
+    {
+        if ($this->isEnabled()) {
+            pinba_server_name_set($serverName);
         }
 
         return $this;
@@ -38,7 +53,7 @@ class Context
     * execute pinba_timer_start
     * @param $tags array of tags
     *
-    * @return $ressource timer
+    * @return $resource timer
     */
     public function start($tags=null)
     {
@@ -68,7 +83,7 @@ class Context
 
     public function startTimerForRequest(Request $request)
     {
-        $this->setScriptName($request->getPathInfo());
+        $this->setScriptName($this->extractScriptName($request));
 
         $option = array(
             "pathInfo" => $request->getPathInfo(),

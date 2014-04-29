@@ -17,7 +17,9 @@ class CedriclombardotPinbaExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setParameter('pinba.script_name_pattern', $config['script_name_pattern']);
+        foreach ($config as $key => &$value) {
+            $container->setParameter("pinba.$key", $value);
+        }
     }
 
     public function getAlias()

@@ -24,7 +24,10 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('script_name_pattern')
-                    ->defaultValue('{PATH_INFO}')
+                    ->defaultValue('{REQUEST_URI}')
+                ->end()
+                ->scalarNode('server_name')
+                    ->defaultNull()
                 ->end()
             ->end()
         ;

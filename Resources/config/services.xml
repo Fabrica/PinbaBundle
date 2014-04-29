@@ -17,6 +17,9 @@
 
         <service id="pinba.context" class="%pinba.context.class%" public="true">
             <argument>%pinba.script_name_pattern%</argument>
+            <call method="setServerName">
+                <argument>%pinba.server_name%</argument>
+            </call>
         </service>
 
     </services>
